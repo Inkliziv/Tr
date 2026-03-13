@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String
+  password      String?
+  role          String    @default("STUDENT")
+  avatar        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  courses       Course[]  @relation("TeacherCourses")
+  enrollments   Enrollment[]
+  feedbacks     Feedback[]
+  chatMessages  ChatMessage[]
+  forumPosts    ForumPost[]
+  forumReplies  ForumReply[]
+  accounts      Account[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  language    String   @default("uz")
+  level       String   @default("beginner")
+  category    String?
+  tags        String?
+  thumbnail   String?
+  teacherId   String
+  teacher     User     @relation("TeacherCourses", fields: [teacherId], references: [id])
+  modules     Module[]
+  enrollments Enrollment[]
+  feedbacks   Feedback[]
+  chatMessages ChatMessage[]
+  forumPosts  ForumPost[]
+  announcements Announcement[]
+  license     String   @default("CC BY")
+  status      String   @default("DRAFT")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Module {
+  id          String  @id @default(cuid())
+  courseId     String
+  course      Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  objectives  String?
+  order       Int
+  duration    Int?
+  topics      Topic[]
+}
+
+model Topic {
+  id        String @id @default(cuid())
+  moduleId  String
+  module    Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  title     String
+  type      String @default("THEORY")
+  content   String @default("{}") 
+  order     Int
+  duration  Int?
+  bloomLevel String?
+  versions  String? 
+}
+
+model Enrollment {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId   String
+  user      User     @relation(fields: [userId], references: [id])
+  course    Course   @relation(fields: [courseId], references: [id])
+  progress  Float    @default(0)
+  completed String?
+  enrolledAt DateTime @default(now())
+  @@unique([userId, courseId])
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  courseId   String
+  userId    String?
+  course    Course   @relation(fields: [courseId], references: [id])
+  user      User?    @relation(fields: [userId], references: [id])
+  rating    Int
+  comment   String?
+  sentiment String?
+  anonymous Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  courseId   String
+  userId    String
+  course    Course   @relation(fields: [courseId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  role      String
+  content   String
+  createdAt DateTime @default(now())
+}
+
+model QuestionBank {
+  id          String @id @default(cuid())
+  courseId     String?
+  question    String
+  type        String
+  options     String?
+  correctAnswer String?
+  explanation String?
+  difficulty  String @default("MEDIUM")
+  bloomLevel  String?
+  topic       String?
+  tags        String?
+  createdAt   DateTime @default(now())
+}
+
+model MediaFile {
+  id        String   @id @default(cuid())
+  userId    String
+  filename  String
+  url       String
+  type      String
+  size      Int
+  altText   String?
+  tags      String?
+  courseId   String?
+  createdAt DateTime @default(now())
+}
+
+model ForumPost {
+  id        String   @id @default(cuid())
+  courseId   String
+  userId    String
+  course    Course   @relation(fields: [courseId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  content   String
+  tag       String   @default("DISCUSSION")
+  upvotes   Int      @default(0)
+  replies   ForumReply[]
+  createdAt DateTime @default(now())
+}
+
+model ForumReply {
+  id        String   @id @default(cuid())
+  postId    String
+  userId    String
+  post      ForumPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
+  content   String
+  isBestAnswer Boolean @default(false)
+  upvotes   Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  courseId   String
+  course    Course   @relation(fields: [courseId], references: [id])
+  title     String
+  content   String
+  scheduledAt DateTime?
+  createdAt DateTime @default(now())
+}

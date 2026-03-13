@@ -1,0 +1,903 @@
+
+> eduforge@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env
+
+  Creating an optimized production build ...
+Error: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [2m[at onInvalidCandidate (D:\TRICH\eduforge\node_modules\tailwindcss\dist\lib.js:21:1314)][0m
+    [2m[at Ee (D:\TRICH\eduforge\node_modules\tailwindcss\dist\lib.js:16:37066)][0m
+    [2m[at D:\TRICH\eduforge\node_modules\tailwindcss\dist\lib.js:21:355][0m
+    [2m[at Pr (D:\TRICH\eduforge\node_modules\tailwindcss\dist\lib.js:3:1733)][0m
+    [2m[at _ (D:\TRICH\eduforge\node_modules\tailwindcss\dist\lib.js:3:1377)][0m
+    [2m[at Te (D:\TRICH\eduforge\node_modules\tailwindcss\dist\lib.js:21:172)][0m
+    [2m[at pn (D:\TRICH\eduforge\node_modules\tailwindcss\dist\lib.js:38:294)][0m
+    [2m[at process.processTicksAndRejections (node:internal/process/task_queues:105:5)][0m
+    [2m[at async dn (D:\TRICH\eduforge\node_modules\tailwindcss\dist\lib.js:38:631)][0m
+    [2m[at async Xr (D:\TRICH\eduforge\node_modules\@tailwindcss\node\dist\index.js:10:3417)][0m
+
+> Build error occurred
+Error: Turbopack build failed with 34 errors:
+./src/app/globals.css
+Error evaluating Node.js code
+CssSyntaxError: tailwindcss: D:\TRICH\eduforge\src\app\globals.css:1:1: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    at Input.error (node_modules/postcss/lib/input.js:135:16) [D:\TRICH\eduforge\.next\build\chunks\node_modules_fe693df6._.js:4651:22]
+    at Root.error (node_modules/postcss/lib/node.js:146:32) [D:\TRICH\eduforge\.next\build\chunks\node_modules_fe693df6._.js:928:38]
+    [at Object.Once (D:\TRICH\eduforge\node_modules\@tailwindcss\postcss\dist\index.js:10:6913)]
+    [at process.processTicksAndRejections (node:internal/process/task_queues:105:5)]
+    at async LazyResult.runAsync (node_modules/postcss/lib/lazy-result.js:293:11) [D:\TRICH\eduforge\.next\build\chunks\node_modules_fe693df6._.js:6214:21]
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [D:\TRICH\eduforge\.next\build\chunks\[root-of-the-server]__51225daf._.js:146:36]
+    at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23) [D:\TRICH\eduforge\.next\build\chunks\[root-of-the-server]__974941ed._.js:443:31]
+
+Import trace:
+  Client Component Browser:
+    ./src/app/globals.css [Client Component Browser]
+    ./src/app/layout.tsx [Server Component]
+
+
+./src/components/layout/Sidebar.tsx:2:10
+Ecmascript file had an error
+[0m [90m 1 |[39m [36mimport[39m [33mLink[39m [36mfrom[39m [32m"next/link"[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { usePathname } [36mfrom[39m [32m"next/navigation"[39m
+ [90m   |[39m          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m { [33mBookOpen[39m[33m,[39m [33mLayoutDashboard[39m[33m,[39m [33mLibrary[39m[33m,[39m [33mMessageSquare[39m[33m,[39m [33mPieChart[39m[33m,[39m [33mSettings[39m[33m,[39m [33mPresentation[39m[33m,[39m [33mHelpCircle[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 4 |[39m [36mimport[39m { cn } [36mfrom[39m [32m"@/lib/utils"[39m
+ [90m 5 |[39m[0m
+
+You're importing a component that needs `usePathname`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+Import trace:
+  Server Component:
+    ./src/components/layout/Sidebar.tsx
+    ./src/app/dashboard/layout.tsx
+
+
+./src/lib/mock-data.ts:204:33
+Parsing ecmascript source code failed
+[0m [90m 202 |[39m     topics[33m:[39m [
+ [90m 203 |[39m       { id[33m:[39m [32m'topic-1'[39m[33m,[39m moduleId[33m:[39m [32m'mod-1'[39m[33m,[39m title[33m:[39m [32m'Python nima?'[39m[33m,[39m type[33m:[39m [32m'THEORY'[39m[33m,[39m content[33m:[39m { blocks[33m:[39m [{ type[33m:[39m [32m'paragraph'[39m[33m,[39m content[33m:[39m [32m'Python — yuqori darajali, umumiy maqsadli dasturlash tili.'[39m }] }[33m,[39m order[33m:[39m [35m1[39m[33m,[39m duration[33m:[39m [35m15[39m[33m,[39m bloomLevel[33m:[39m [32m'REMEMBER'[39m }[33m,[39m
+[31m[1m>[22m[39m[90m 204 |[39m       { id[33m:[39m [32m'topic-2'[39m[33m,[39m moduleId [36min[39m[33m:[39m [32m'mod-1'[39m[33m,[39m title[33m:[39m [32m'Python o\'rnatish'[39m[33m,[39m type[33m:[39m [32m'THEORY'[39m[33m,[39m content[33m:[39m {}[33m,[39m order[33m:[39m [35m2[39m[33m,[39m duration[33m:[39m [35m20[39m[33m,[39m bloomLevel[33m:[39m [32m'APPLY'[39m }[33m,[39m
+ [90m     |[39m                                 [31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 205 |[39m       { id[33m:[39m [32m'topic-3'[39m[33m,[39m moduleId[33m:[39m [32m'mod-1'[39m[33m,[39m title[33m:[39m [32m'Kirish testi'[39m[33m,[39m type[33m:[39m [32m'QUIZ'[39m[33m,[39m content[33m:[39m { questions[33m:[39m [] }[33m,[39m order[33m:[39m [35m3[39m[33m,[39m duration[33m:[39m [35m10[39m[33m,[39m bloomLevel[33m:[39m [32m'UNDERSTAND'[39m }[33m,[39m
+ [90m 206 |[39m     ]
+ [90m 207 |[39m   }[33m,[39m[0m
+
+Expression expected
+
+Import traces:
+  Server Component:
+    ./src/lib/mock-data.ts
+    ./src/app/dashboard/page.tsx
+
+  Client Component Browser:
+    ./src/lib/mock-data.ts [Client Component Browser]
+    ./src/app/courses/[id]/analytics/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/lib/mock-data.ts [Client Component SSR]
+    ./src/app/courses/[id]/analytics/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/analytics/page.tsx [Server Component]
+
+
+./src/app/admin/page.tsx:7:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m  5 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardDescription[39m } [36mfrom[39m [32m"@/components/ui/card"[39m
+ [90m  6 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  8 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m  9 |[39m [36mimport[39m {
+ [90m 10 |[39m   [33mDropdownMenu[39m[33m,[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/page.tsx [Client Component Browser]
+    ./src/app/admin/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/page.tsx [Client Component SSR]
+    ./src/app/admin/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/admin/settings/page.tsx:6:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 4 |[39m [36mimport[39m { [33mSave[39m[33m,[39m [33mServer[39m[33m,[39m [33mShield[39m[33m,[39m [33mGlobe[39m[33m,[39m [33mBell[39m[33m,[39m [33mMail[39m[33m,[39m [33mKey[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 5 |[39m
+[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 7 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m 8 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m
+ [90m 9 |[39m [36mimport[39m { [33mSwitch[39m } [36mfrom[39m [32m"@/components/ui/switch"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/settings/page.tsx [Client Component Browser]
+    ./src/app/admin/settings/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/settings/page.tsx [Client Component SSR]
+    ./src/app/admin/settings/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/[id]/analytics/page.tsx:16:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 14 |[39m } [36mfrom[39m [32m"recharts"[39m
+ [90m 15 |[39m
+[31m[1m>[22m[39m[90m 16 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 17 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m"@/components/ui/card"[39m
+ [90m 18 |[39m [36mimport[39m { [33mSelect[39m[33m,[39m [33mSelectContent[39m[33m,[39m [33mSelectItem[39m[33m,[39m [33mSelectTrigger[39m[33m,[39m [33mSelectValue[39m } [36mfrom[39m [32m"@/components/ui/select"[39m
+ [90m 19 |[39m [36mimport[39m { [33mTabs[39m[33m,[39m [33mTabsContent[39m[33m,[39m [33mTabsList[39m[33m,[39m [33mTabsTrigger[39m } [36mfrom[39m [32m"@/components/ui/tabs"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/[id]/analytics/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/analytics/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/[id]/analytics/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/analytics/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/[id]/edit/page.tsx:8:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m  6 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mSave[39m[33m,[39m [33mPlus[39m[33m,[39m [33mSettings[39m[33m,[39m [33mEye[39m[33m,[39m [33mMoreVertical[39m[33m,[39m [33mGripVertical[39m[33m,[39m [33mFileText[39m[33m,[39m [33mLayoutTemplate[39m[33m,[39m [33mPenTool[39m[33m,[39m [33mLayoutDashboard[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m  7 |[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m 10 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m
+ [90m 11 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/[id]/edit/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/[id]/edit/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/[id]/edit/topic/[topicId]/page.tsx:8:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m  6 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mExternalLink[39m[33m,[39m [33mSave[39m[33m,[39m [33mBookOpen[39m[33m,[39m [33mClock[39m[33m,[39m [33mBarChart[39m[33m,[39m [33mHistory[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m  7 |[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m 10 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 11 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m"@/components/ui/separator"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/[id]/feedback/page.tsx:8:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m  6 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mMessageSquare[39m[33m,[39m [33mStar[39m[33m,[39m [33mThumbsUp[39m[33m,[39m [33mThumbsDown[39m[33m,[39m [33mAlertCircle[39m[33m,[39m [33mSparkles[39m[33m,[39m [33mFilter[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m  7 |[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m"@/components/ui/card"[39m
+ [90m 10 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 11 |[39m [36mimport[39m { [33mAvatar[39m[33m,[39m [33mAvatarFallback[39m[33m,[39m [33mAvatarImage[39m } [36mfrom[39m [32m"@/components/ui/avatar"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/[id]/feedback/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/feedback/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/[id]/feedback/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/feedback/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/[id]/forum/page.tsx:11:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m  9 |[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 10 |[39m
+[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 12 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m 13 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 14 |[39m [36mimport[39m { [33mAvatar[39m[33m,[39m [33mAvatarFallback[39m[33m,[39m [33mAvatarImage[39m } [36mfrom[39m [32m"@/components/ui/avatar"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/[id]/forum/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/forum/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/[id]/forum/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/forum/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/new/page.tsx:7:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m  5 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m"next/navigation"[39m
+ [90m  6 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mCheck[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mSparkles[39m } [36mfrom[39m [32m"lucide-react"[39m
+[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  8 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m  9 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m"@/components/ui/label"[39m
+ [90m 10 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/new/page.tsx [Client Component Browser]
+    ./src/app/courses/new/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/new/page.tsx [Client Component SSR]
+    ./src/app/courses/new/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/dashboard/courses/page.tsx:3:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 1 |[39m [36mimport[39m [33mLink[39m [36mfrom[39m [32m"next/link"[39m
+ [90m 2 |[39m [36mimport[39m { [33mSearch[39m[33m,[39m [33mPlus[39m[33m,[39m [33mFilter[39m[33m,[39m [33mMoreHorizontal[39m[33m,[39m [33mBookOpen[39m } [36mfrom[39m [32m"lucide-react"[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m 5 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 6 |[39m [36mimport[39m { mockCourses } [36mfrom[39m [32m"@/lib/mock-data"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/dashboard/page.tsx:3:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 1 |[39m [36mimport[39m [33mLink[39m [36mfrom[39m [32m"next/link"[39m
+ [90m 2 |[39m [36mimport[39m { [33mPlus[39m[33m,[39m [33mUsers[39m[33m,[39m [33mBookOpen[39m[33m,[39m [33mClock[39m[33m,[39m [33mActivity[39m[33m,[39m [33mArrowRight[39m[33m,[39m [33mMoreVertical[39m } [36mfrom[39m [32m"lucide-react"[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardFooter[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m"@/components/ui/card"[39m
+ [90m 5 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 6 |[39m [36mimport[39m { [33mDropdownMenu[39m[33m,[39m [33mDropdownMenuContent[39m[33m,[39m [33mDropdownMenuItem[39m[33m,[39m [33mDropdownMenuTrigger[39m } [36mfrom[39m [32m"@/components/ui/dropdown-menu"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/learn/[courseId]/layout.tsx:8:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m  6 |[39m [36mimport[39m { [33mPlayCircle[39m[33m,[39m [33mCheckCircle2[39m[33m,[39m [33mChevronDown[39m[33m,[39m [33mAlignLeft[39m[33m,[39m [33mBookOpen[39m[33m,[39m [33mMonitorPlay[39m[33m,[39m [33mChevronLeft[39m[33m,[39m [33mChevronRight[39m[33m,[39m [33mMenu[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m  7 |[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m { [33mProgress[39m } [36mfrom[39m [32m"@/components/ui/progress"[39m
+ [90m 10 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 11 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m"@/components/ui/scroll-area"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/learn/[courseId]/layout.tsx [Client Component Browser]
+    ./src/app/learn/[courseId]/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/learn/[courseId]/layout.tsx [Client Component SSR]
+    ./src/app/learn/[courseId]/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/learn/[courseId]/topic/[topicId]/page.tsx:8:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m  6 |[39m
+ [90m  7 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m
+ [90m 10 |[39m [36mimport[39m { mockModules } [36mfrom[39m [32m"@/lib/mock-data"[39m
+ [90m 11 |[39m [36mimport[39m { [33mStudentChatbot[39m } [36mfrom[39m [32m"@/components/chat/StudentChatbot"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Client Component Browser]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Client Component SSR]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/assessment/QuizBuilder.tsx:6:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 4 |[39m [36mimport[39m { [33mPlus[39m[33m,[39m [33mSettings[39m[33m,[39m [33mSparkles[39m[33m,[39m [33mGripVertical[39m[33m,[39m [33mTrash2[39m[33m,[39m [33mSettings2[39m[33m,[39m [33mCheckCircle2[39m[33m,[39m [33mChevronDown[39m[33m,[39m [33mChevronUp[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 5 |[39m
+[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 7 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m 8 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m
+ [90m 9 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardFooter[39m } [36mfrom[39m [32m"@/components/ui/card"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/assessment/QuizBuilder.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/assessment/QuizBuilder.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/chat/StudentChatbot.tsx:6:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 4 |[39m [36mimport[39m { [33mMessageSquare[39m[33m,[39m [33mX[39m[33m,[39m [33mSend[39m[33m,[39m [33mBot[39m[33m,[39m [33mUser[39m[33m,[39m [33mSparkles[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mMinusCircle[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 5 |[39m
+[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 7 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m 8 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 9 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardFooter[39m } [36mfrom[39m [32m"@/components/ui/card"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/chat/StudentChatbot.tsx [Client Component Browser]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Client Component Browser]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/chat/StudentChatbot.tsx [Client Component SSR]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Client Component SSR]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/editor/AIWritingPanel.tsx:6:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 4 |[39m [36mimport[39m { [33mSparkles[39m[33m,[39m [33mLanguages[39m[33m,[39m [33mFileText[39m[33m,[39m [33mCheck[39m[33m,[39m [33mX[39m[33m,[39m [33mRefreshCw[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 5 |[39m
+[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 7 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m"@/components/ui/card"[39m
+ [90m 8 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m"@/components/ui/separator"[39m
+ [90m 9 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/editor/AIWritingPanel.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/editor/AIWritingPanel.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/editor/TheoryEditor.tsx:18:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 16 |[39m [36mimport[39m { [33mToggle[39m } [36mfrom[39m [32m"@/components/ui/toggle"[39m
+ [90m 17 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m"@/components/ui/separator"[39m
+[31m[1m>[22m[39m[90m 18 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 19 |[39m [36mimport[39m { [33mTooltip[39m[33m,[39m [33mTooltipContent[39m[33m,[39m [33mTooltipProvider[39m[33m,[39m [33mTooltipTrigger[39m } [36mfrom[39m [32m"@/components/ui/tooltip"[39m
+ [90m 20 |[39m
+ [90m 21 |[39m [36minterface[39m [33mTheoryEditorProps[39m {[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/editor/TheoryEditor.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/editor/TheoryEditor.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/layout/Header.tsx:3:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 1 |[39m [36mimport[39m { [33mBell[39m[33m,[39m [33mSearch[39m[33m,[39m [33mSun[39m[33m,[39m [33mMoon[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 2 |[39m [36mimport[39m { useTheme } [36mfrom[39m [32m"next-themes"[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m 5 |[39m [36mimport[39m {
+ [90m 6 |[39m   [33mDropdownMenu[39m[33m,[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/layout/Header.tsx
+    ./src/app/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/marketing/LandingPageBuilder.tsx:6:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m 4 |[39m [36mimport[39m { [33mEye[39m[33m,[39m [33mSmartphone[39m[33m,[39m [33mMonitorPlay[39m[33m,[39m [33mSave[39m[33m,[39m [33mPlus[39m[33m,[39m [33mArrowUp[39m[33m,[39m [33mArrowDown[39m[33m,[39m [33mTrash2[39m[33m,[39m [33mHelpCircle[39m[33m,[39m [33mPalette[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 5 |[39m
+[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 7 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m 8 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m
+ [90m 9 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardDescription[39m } [36mfrom[39m [32m"@/components/ui/card"[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/marketing/LandingPageBuilder.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/marketing/LandingPageBuilder.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/presentation/SlideEditor.tsx:11:1
+Module not found: Can't resolve '@/components/ui/button'
+[0m [90m  9 |[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 10 |[39m
+[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 12 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m"@/components/ui/separator"[39m
+ [90m 13 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 14 |[39m[0m
+
+Import map: aliased to relative './src/components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/presentation/SlideEditor.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/presentation/SlideEditor.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/admin/page.tsx:8:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m  6 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m  7 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m {
+ [90m 10 |[39m   [33mDropdownMenu[39m[33m,[39m
+ [90m 11 |[39m   [33mDropdownMenuContent[39m[33m,[39m[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/page.tsx [Client Component Browser]
+    ./src/app/admin/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/page.tsx [Client Component SSR]
+    ./src/app/admin/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/admin/settings/page.tsx:7:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m  5 |[39m
+ [90m  6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  8 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m
+ [90m  9 |[39m [36mimport[39m { [33mSwitch[39m } [36mfrom[39m [32m"@/components/ui/switch"[39m
+ [90m 10 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m"@/components/ui/label"[39m[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/admin/settings/page.tsx [Client Component Browser]
+    ./src/app/admin/settings/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/admin/settings/page.tsx [Client Component SSR]
+    ./src/app/admin/settings/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/[id]/edit/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m  7 |[39m
+ [90m  8 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 10 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m
+ [90m 11 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 12 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m } [36mfrom[39m [32m"@/components/ui/card"[39m[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/[id]/edit/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/[id]/edit/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/[id]/edit/topic/[topicId]/page.tsx:9:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m  7 |[39m
+ [90m  8 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 10 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 11 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m"@/components/ui/separator"[39m
+ [90m 12 |[39m [36mimport[39m {[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/topic/[topicId]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/[id]/forum/page.tsx:12:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m 10 |[39m
+ [90m 11 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m 12 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 13 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 14 |[39m [36mimport[39m { [33mAvatar[39m[33m,[39m [33mAvatarFallback[39m[33m,[39m [33mAvatarImage[39m } [36mfrom[39m [32m"@/components/ui/avatar"[39m
+ [90m 15 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardHeader[39m } [36mfrom[39m [32m"@/components/ui/card"[39m[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/[id]/forum/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/forum/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/[id]/forum/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/forum/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/courses/new/page.tsx:8:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m  6 |[39m [36mimport[39m { [33mArrowLeft[39m[33m,[39m [33mCheck[39m[33m,[39m [33mLoader2[39m[33m,[39m [33mSparkles[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m  7 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m { [33mLabel[39m } [36mfrom[39m [32m"@/components/ui/label"[39m
+ [90m 10 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m
+ [90m 11 |[39m [36mimport[39m {[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/app/courses/new/page.tsx [Client Component Browser]
+    ./src/app/courses/new/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/app/courses/new/page.tsx [Client Component SSR]
+    ./src/app/courses/new/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/dashboard/courses/page.tsx:4:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m 2 |[39m [36mimport[39m { [33mSearch[39m[33m,[39m [33mPlus[39m[33m,[39m [33mFilter[39m[33m,[39m [33mMoreHorizontal[39m[33m,[39m [33mBookOpen[39m } [36mfrom[39m [32m"lucide-react"[39m
+ [90m 3 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m 6 |[39m [36mimport[39m { mockCourses } [36mfrom[39m [32m"@/lib/mock-data"[39m
+ [90m 7 |[39m [36mimport[39m { formatDate } [36mfrom[39m [32m"@/lib/utils"[39m[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/assessment/QuizBuilder.tsx:7:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m  5 |[39m
+ [90m  6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  8 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m
+ [90m  9 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardFooter[39m } [36mfrom[39m [32m"@/components/ui/card"[39m
+ [90m 10 |[39m [36mimport[39m {[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/assessment/QuizBuilder.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/assessment/QuizBuilder.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/chat/StudentChatbot.tsx:7:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m  5 |[39m
+ [90m  6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  8 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m
+ [90m  9 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardFooter[39m } [36mfrom[39m [32m"@/components/ui/card"[39m
+ [90m 10 |[39m [36mimport[39m { [33mScrollArea[39m } [36mfrom[39m [32m"@/components/ui/scroll-area"[39m[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/chat/StudentChatbot.tsx [Client Component Browser]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Client Component Browser]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/chat/StudentChatbot.tsx [Client Component SSR]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Client Component SSR]
+    ./src/app/learn/[courseId]/topic/[topicId]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/layout/Header.tsx:4:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m 2 |[39m [36mimport[39m { useTheme } [36mfrom[39m [32m"next-themes"[39m
+ [90m 3 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m [36mimport[39m {
+ [90m 6 |[39m   [33mDropdownMenu[39m[33m,[39m
+ [90m 7 |[39m   [33mDropdownMenuContent[39m[33m,[39m[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/layout/Header.tsx
+    ./src/app/dashboard/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/marketing/LandingPageBuilder.tsx:7:1
+Module not found: Can't resolve '@/components/ui/input'
+[0m [90m  5 |[39m
+ [90m  6 |[39m [36mimport[39m { [33mButton[39m } [36mfrom[39m [32m"@/components/ui/button"[39m
+[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mInput[39m } [36mfrom[39m [32m"@/components/ui/input"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  8 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m"@/components/ui/textarea"[39m
+ [90m  9 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m[33m,[39m [33mCardDescription[39m } [36mfrom[39m [32m"@/components/ui/card"[39m
+ [90m 10 |[39m [36mimport[39m { [33mBadge[39m } [36mfrom[39m [32m"@/components/ui/badge"[39m[0m
+
+Import map: aliased to relative './src/components/ui/input' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/marketing/LandingPageBuilder.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component Browser]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/marketing/LandingPageBuilder.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Client Component SSR]
+    ./src/app/courses/[id]/edit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/app/layout.tsx:5:1
+Module not found: Can't resolve '@/components/ui/toaster'
+[0m [90m 3 |[39m [36mimport[39m [32m'@/app/globals.css'[39m
+ [90m 4 |[39m [36mimport[39m { [33mThemeProvider[39m } [36mfrom[39m [32m'@/components/theme-provider'[39m
+[31m[1m>[22m[39m[90m 5 |[39m [36mimport[39m { [33mToaster[39m } [36mfrom[39m [32m'@/components/ui/toaster'[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 6 |[39m
+ [90m 7 |[39m [36mconst[39m inter [33m=[39m [33mInter[39m({ subsets[33m:[39m [[32m'latin'[39m][33m,[39m variable[33m:[39m [32m'--font-inter'[39m })
+ [90m 8 |[39m [36mconst[39m jakarta [33m=[39m [33mPlus_Jakarta_Sans[39m({ subsets[33m:[39m [[32m'latin'[39m][33m,[39m variable[33m:[39m [32m'--font-jakarta'[39m })[0m
+
+Import map: aliased to relative './src/components/ui/toaster' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at async transform (turbopack:///[turbopack-node]/transforms/postcss.ts:70:34) [D:\TRICH\eduforge\.next\build\chunks\[root-of-the-server]__51225daf._.js:146:36])
+    at async run (turbopack:///[turbopack-node]/ipc/evaluate.ts:92:23) [D:\TRICH\eduforge\.next\build\chunks\[root-of-the-server]__974941ed._.js:443:31])
+    at <unknown> (./src/components/layout/Sidebar.tsx:2:10)
+    at <unknown> (./src/lib/mock-data.ts:204:33)
+    at <unknown> (./src/app/admin/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/admin/settings/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/[id]/analytics/page.tsx:16:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/[id]/edit/page.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/[id]/edit/topic/[topicId]/page.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/[id]/feedback/page.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/[id]/forum/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/new/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/dashboard/courses/page.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/dashboard/page.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/learn/[courseId]/layout.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/learn/[courseId]/topic/[topicId]/page.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/assessment/QuizBuilder.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/chat/StudentChatbot.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/editor/AIWritingPanel.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/editor/TheoryEditor.tsx:18:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/layout/Header.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/marketing/LandingPageBuilder.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/presentation/SlideEditor.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/admin/page.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/admin/settings/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/[id]/edit/page.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/[id]/edit/topic/[topicId]/page.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/[id]/forum/page.tsx:12:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/courses/new/page.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/dashboard/courses/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/assessment/QuizBuilder.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/chat/StudentChatbot.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/layout/Header.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/marketing/LandingPageBuilder.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/app/layout.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

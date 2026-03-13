@@ -1,0 +1,23 @@
+
+> eduforge@0.1.0 build
+> next build
+
+▲ Next.js 16.1.6 (Turbopack)
+- Environments: .env
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 7.7s
+  Running TypeScript ...
+Failed to compile.
+
+./src/app/admin/settings/page.tsx:109:22
+Type error: Cannot find name 'Badge'.
+
+[0m [90m 107 |[39m                       [33m<[39m[33mKey[39m className[33m=[39m[32m"mr-2 h-5 w-5"[39m [33m/[39m[33m>[39m [33mAnthropic[39m [33mClaude[39m [33mAPI[39m ([33mAI[39m [33mCore[39m)
+ [90m 108 |[39m                     [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+[31m[1m>[22m[39m[90m 109 |[39m                     [33m<[39m[33mBadge[39m className[33m=[39m[32m"bg-success text-white"[39m[33m>[39m[33mFaol[39m[33m<[39m[33m/[39m[33mBadge[39m[33m>[39m
+ [90m     |[39m                      [31m[1m^[22m[39m
+ [90m 110 |[39m                   [33m<[39m[33m/[39m[33mdiv[39m[33m>[39m
+ [90m 111 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"space-y-2"[39m[33m>[39m
+ [90m 112 |[39m                     [33m<[39m[33mLabel[39m[33m>[39m[33mAPI[39m [33mKalit[39m ([33mAPI[39m [33mKey[39m)[33m<[39m[33m/[39m[33mLabel[39m[33m>[39m[0m
+Next.js build worker exited with code: 1 and signal: null
