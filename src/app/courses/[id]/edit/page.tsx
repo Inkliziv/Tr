@@ -273,7 +273,7 @@ export default function CourseEditorPage() {
 
           {activeTab === "quiz" && (
             <div className="w-full animate-in fade-in duration-300">
-              <QuizBuilder />
+              <QuizBuilder quizId={course.id as string} />
             </div>
           )}
 

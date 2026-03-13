@@ -1,0 +1,40 @@
+import { NextResponse } from "next/server"
+import { getServerSession } from "next-auth"
+
+import { prisma } from "@/lib/prisma"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+
+interface Params {
+  params: { id: string }
+}
+
+// POST /api/courses/:id/modules — add module
+export async function POST(req: Request, { params }: Params) {
+  const session = await getServerSession(authOptions as any)
+  if (!session?.user?.email) {
+    return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+  }
+
+  const body = await req.json()
+  const { title } = body
+
+  if (!title) {
+    return NextResponse.json({ message: "Modul nomi talab qilinadi." }, { status: 400 })
+  }
+
+  const maxOrder = await prisma.module.aggregate({
+    _max: { order: true },
+    where: { courseId: params.id },
+  })
+
+  const module = await prisma.module.create({
+    data: {
+      title,
+      courseId: params.id,
+      order: (maxOrder._max.order || 0) + 1,
+    },
+  })
+
+  return NextResponse.json(module, { status: 201 })
+}
+

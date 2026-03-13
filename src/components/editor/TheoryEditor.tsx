@@ -19,8 +19,8 @@ import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 interface TheoryEditorProps {
-  content: string;
-  onChange: (content: string) => void;
+  content: string
+  onChange: (content: string) => void
 }
 
 export function TheoryEditor({ content, onChange }: TheoryEditorProps) {

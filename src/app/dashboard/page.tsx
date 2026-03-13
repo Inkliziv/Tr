@@ -4,18 +4,31 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { mockCourses, currentUser, mockAnalytics } from "@/lib/mock-data"
 import { formatDate } from "@/lib/utils"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 
-export default function DashboardPage() {
-  const publishedCourses = mockCourses.filter(c => c.status === 'PUBLISHED')
-  const totalStudents = mockCourses.reduce((acc, curr) => acc + (curr.enrollmentCount || 0), 0)
+async function getCourses() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/courses`, {
+    cache: "no-store",
+  })
+  if (!res.ok) return []
+  return res.json()
+}
+
+export default async function DashboardPage() {
+  const session = await getServerSession(authOptions as any)
+  const courses: any[] = await getCourses()
+  const publishedCourses = courses.filter(c => c.status === "PUBLISHED")
+  const totalStudents = 0
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-heading font-bold tracking-tight text-foreground">Xush kelibsiz, {currentUser.name.split(' ')[0]}!</h1>
+          <h1 className="text-3xl font-heading font-bold tracking-tight text-foreground">
+            Xush kelibsiz, {session?.user?.name?.split(" ")[0] ?? "foydalanuvchi"}!
+          </h1>
           <p className="text-muted-foreground mt-1 text-sm md:text-base">Sizning o'qituvchi panelida bugungi holat.</p>
         </div>
         <Button size="lg" className="rounded-full shadow-sm" asChild>
@@ -51,7 +64,7 @@ export default function DashboardPage() {
           <CardContent>
             <div className="text-2xl font-bold">{publishedCourses.length}</div>
             <p className="text-xs text-muted-foreground mt-1 flex items-center">
-              {mockCourses.length - publishedCourses.length} ta drafkurs
+              {courses.length - publishedCourses.length} ta drafkurs
             </p>
           </CardContent>
         </Card>
@@ -92,7 +105,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {mockCourses.slice(0, 3).map((course) => (
+          {courses.slice(0, 3).map((course) => (
             <Card key={course.id} className="overflow-hidden flex flex-col hover:shadow-md transition-shadow duration-300 border-border/60">
               <div className="aspect-video w-full bg-muted relative group">
                 {course.thumbnail ? (
@@ -104,19 +117,30 @@ export default function DashboardPage() {
                   </div>
                 )}
                 <div className="absolute top-3 right-3">
-                  <Badge variant={
-                    course.status === 'PUBLISHED' ? 'default' : 
-                    course.status === 'DRAFT' ? 'secondary' : 'outline'
-                  } className={course.status === 'PUBLISHED' ? "bg-success hover:bg-success/90" : ""}>
-                    {course.status === 'PUBLISHED' ? 'Faol' : 
-                     course.status === 'DRAFT' ? 'Qoralama' : 'Kutilmoqda'}
+                  <Badge
+                    variant={
+                      course.status === "PUBLISHED"
+                        ? "default"
+                        : course.status === "DRAFT"
+                        ? "secondary"
+                        : "outline"
+                    }
+                    className={course.status === "PUBLISHED" ? "bg-success hover:bg-success/90" : ""}
+                  >
+                    {course.status === "PUBLISHED"
+                      ? "Faol"
+                      : course.status === "DRAFT"
+                      ? "Qoralama"
+                      : "Kutilmoqda"}
                   </Badge>
                 </div>
               </div>
               <CardHeader className="p-5 pb-0 flex-1">
                 <div className="flex justify-between items-start gap-4">
                   <div>
-                    <Badge variant="outline" className="text-[10px] mb-2 font-medium uppercase tracking-wider">{course.category}</Badge>
+                    <Badge variant="outline" className="text-[10px] mb-2 font-medium uppercase tracking-wider">
+                      Kurs
+                    </Badge>
                     <CardTitle className="text-lg line-clamp-1 group-hover:text-primary transition-colors">
                       <Link href={`/courses/${course.id}/edit`}>{course.title}</Link>
                     </CardTitle>
@@ -142,7 +166,7 @@ export default function DashboardPage() {
               <CardFooter className="p-5 pt-4 border-t text-xs text-muted-foreground flex justify-between items-center mt-4">
                 <div className="flex items-center gap-1.5">
                   <Users className="h-3.5 w-3.5" />
-                  <span>{course.enrollmentCount || 0} talaba</span>
+                  <span>— talaba</span>
                 </div>
                 <div className="flex items-center gap-1">
                   Muddati: <span className="font-medium text-foreground">{formatDate(course.updatedAt)}</span>

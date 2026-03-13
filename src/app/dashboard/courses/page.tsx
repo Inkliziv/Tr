@@ -3,7 +3,6 @@ import { Search, Plus, Filter, MoreHorizontal, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { mockCourses } from "@/lib/mock-data"
 import { formatDate } from "@/lib/utils"
 import {
   DropdownMenu,
@@ -20,7 +19,27 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-export default function CoursesPage() {
+async function getCourses() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/courses`, {
+    cache: "no-store",
+  })
+
+  if (!res.ok) {
+    return []
+  }
+
+  return res.json()
+}
+
+export default async function CoursesPage() {
+  const courses: {
+    id: string
+    title: string
+    description: string
+    status: string
+    createdAt: string
+    updatedAt: string
+  }[] = await getCourses()
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -61,7 +80,7 @@ export default function CoursesPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {mockCourses.map((course) => (
+            {courses.map((course) => (
               <TableRow key={course.id} className="group transition-colors hover:bg-muted/50">
                 <TableCell className="font-medium">
                   <div className="flex items-center gap-3">
@@ -72,21 +91,32 @@ export default function CoursesPage() {
                       <Link href={`/courses/${course.id}/edit`} className="hover:text-primary hover:underline transition-colors block line-clamp-1">
                         {course.title}
                       </Link>
-                      <span className="text-xs text-muted-foreground block line-clamp-1 mt-0.5">{course.category} • {course.moduleCount} ta modul</span>
+                      <span className="text-xs text-muted-foreground block line-clamp-1 mt-0.5">Kurs • Modul ma'lumotlari</span>
                     </div>
                   </div>
                 </TableCell>
                 <TableCell>
-                  <Badge variant={
-                    course.status === 'PUBLISHED' ? 'default' : 
-                    course.status === 'DRAFT' ? 'secondary' : 'outline'
-                  } className={course.status === 'PUBLISHED' ? "bg-success" : ""}>
-                    {course.status === 'PUBLISHED' ? 'Faol' : 
-                     course.status === 'DRAFT' ? 'Qoralama' : 'Kutilmoqda'}
+                  <Badge
+                    variant={
+                      course.status === "PUBLISHED"
+                        ? "default"
+                        : course.status === "DRAFT"
+                        ? "secondary"
+                        : "outline"
+                    }
+                    className={course.status === "PUBLISHED" ? "bg-success" : ""}
+                  >
+                    {course.status === "PUBLISHED"
+                      ? "Faol"
+                      : course.status === "DRAFT"
+                      ? "Qoralama"
+                      : "Kutilmoqda"}
                   </Badge>
                 </TableCell>
-                <TableCell>{course.enrollmentCount || 0}</TableCell>
-                <TableCell className="text-muted-foreground text-sm">{formatDate(course.updatedAt)}</TableCell>
+                <TableCell>—</TableCell>
+                <TableCell className="text-muted-foreground text-sm">
+                  {formatDate(course.updatedAt)}
+                </TableCell>
                 <TableCell className="text-right">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

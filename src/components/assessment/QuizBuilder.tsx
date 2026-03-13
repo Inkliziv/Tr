@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Plus, Settings, Sparkles, GripVertical, Trash2, Settings2, CheckCircle2, ChevronDown, ChevronUp, X } from "lucide-react"
+import { Plus, Settings, Sparkles, GripVertical, Trash2, Settings2, CheckCircle2, ChevronDown, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -34,11 +34,16 @@ import {
 
 import { mockQuizQuestions, type QuizQuestion } from "@/lib/mock-data"
 
-export function QuizBuilder() {
+interface QuizBuilderProps {
+  quizId?: string
+}
+
+export function QuizBuilder({ quizId }: QuizBuilderProps) {
   const [questions, setQuestions] = useState<QuizQuestion[]>(mockQuizQuestions)
   const [activeTab, setActiveTab] = useState("questions")
   const [isGenerating, setIsGenerating] = useState(false)
   const [sourceText, setSourceText] = useState("")
+  const [isExporting, setIsExporting] = useState(false)
 
   const addQuestion = (type: QuizQuestion['type']) => {
     const newQuestion: QuizQuestion = {
@@ -57,39 +62,61 @@ export function QuizBuilder() {
     setQuestions(questions.filter(q => q.id !== id))
   }
 
-  const generateAIQuestions = () => {
+  const generateAIQuestions = async () => {
     if (!sourceText) return
     setIsGenerating(true)
-    
-    // Simulate AI Generation 
-    setTimeout(() => {
-      const newQuestions: QuizQuestion[] = [
-        {
-          id: `q-ai-${Date.now()}-1`,
-          question: "AI tomonidan tuzilgan savol 1 (Eslab qolish)",
-          type: "MCQ_SINGLE",
-          options: ["To'g'ri javob", "Xato javob 1", "Xato javob 2", "Xato javob 3"],
-          correctAnswer: 0,
-          difficulty: "EASY",
-          bloomLevel: "REMEMBER",
-          points: 10,
-          explanation: "Matndan olingan tushuntirish."
-        },
-        {
-          id: `q-ai-${Date.now()}-2`,
-          question: "AI tomonidan tuzilgan savol 2 (Tushunish)",
-          type: "TRUE_FALSE",
-          options: ["To'g'ri", "Noto'g'ri"],
-          correctAnswer: 0,
-          difficulty: "MEDIUM",
-          bloomLevel: "UNDERSTAND",
-          points: 5,
-        }
-      ]
-      setQuestions([...questions, ...newQuestions])
-      setIsGenerating(false)
+    try {
+      const res = await fetch("/api/ai/generate-quiz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: sourceText, count: 10, difficulty: "mixed" }),
+      })
+      const data = await res.json()
+      const generated: QuizQuestion[] = (data || []).map((q: any, idx: number) => ({
+        id: `ai-${Date.now()}-${idx}`,
+        question: q.question,
+        type: "MCQ_SINGLE",
+        options: q.options,
+        correctAnswer: q.correct_index,
+        explanation: q.explanation,
+        difficulty: (q.difficulty || "MEDIUM").toUpperCase(),
+        bloomLevel: q.bloom_level,
+        points: 10,
+      }))
+      setQuestions(prev => [...prev, ...generated])
       setSourceText("")
-    }, 2500)
+    } catch (e) {
+      console.error("AI_GENERATE_QUIZ_UI_ERROR", e)
+    } finally {
+      setIsGenerating(false)
+    }
+  }
+
+  const exportToZukkoo = async () => {
+    if (!quizId) return
+    setIsExporting(true)
+    try {
+      const payload = questions
+        .filter(q => q.options && typeof q.correctAnswer !== "undefined")
+        .map(q => ({
+          question: q.question,
+          options: q.options,
+          correct_index: typeof q.correctAnswer === "number" ? q.correctAnswer : 0,
+          time_limit: 30,
+        }))
+      const res = await fetch(`/api/quizzes/${quizId}/export-zukkoo`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ questions: payload }),
+      })
+      const data = await res.json()
+      console.log("Zukkoo JSON:", data)
+      // Bu yerda data ni Zukkoo.uz ga yuborish yoki yangi oyna ochish mumkin.
+    } catch (e) {
+      console.error("ZUKKOO_EXPORT_ERROR", e)
+    } finally {
+      setIsExporting(false)
+    }
   }
 
   const renderQuestionByType = (q: QuizQuestion, index: number) => {
@@ -178,7 +205,11 @@ export function QuizBuilder() {
           <p className="text-muted-foreground text-sm">Savollar tuzing, sozlamalarni o'zgartiring va AI yordamidan foydalaning.</p>
         </div>
         <div className="flex items-center gap-2">
-          
+          {quizId && (
+            <Button variant="outline" size="sm" onClick={exportToZukkoo} disabled={isExporting}>
+              Zukkoo'da o'ynash
+            </Button>
+          )}
           <Dialog>
             <DialogTrigger asChild>
               <Button className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white">

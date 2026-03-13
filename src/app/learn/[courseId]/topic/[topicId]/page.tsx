@@ -7,35 +7,43 @@ import { Play } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
-import { mockModules } from "@/lib/mock-data"
 import { StudentChatbot } from "@/components/chat/StudentChatbot"
+
+interface TopicDto {
+  id: string
+  title: string
+  type: "THEORY" | "VIDEO" | "QUIZ"
+  content: { html?: string }
+}
 
 export default function TopicViewerPage() {
   const params = useParams()
   const topicId = params.topicId as string
-  
-  // Find topic
-  let currentTopic = null
-  let currentModule = null
-  
-  for (const mod of mockModules) {
-    if (topicId) {
-       const topic = mod.topics.find(t => t.id === topicId)
-       if (topic) {
-         currentTopic = topic
-         currentModule = mod
-         break
-       }
-    } else {
-       // Default to very first topic if no ID provided in URL segment
-       currentTopic = mod.topics[0]
-       currentModule = mod
-       break
-    }
-  }
 
-  if (!currentTopic) {
-    return <div className="p-8 text-center text-muted-foreground">Bunday dars topilmadi.</div>
+  const [topic, setTopic] = useState<TopicDto | null>(null)
+  const [moduleTitle, setModuleTitle] = useState("")
+  const [courseTitle, setCourseTitle] = useState("")
+
+  useEffect(() => {
+    const load = async () => {
+      const res = await fetch(`/api/courses/${params.courseId}`)
+      if (!res.ok) return
+      const data = await res.json()
+      setCourseTitle(data.title)
+      for (const mod of data.modules || []) {
+        const t = (mod.topics || []).find((x: any) => x.id === topicId)
+        if (t) {
+          setTopic({ id: t.id, title: t.title, type: t.type, content: t.content || {} })
+          setModuleTitle(mod.title)
+          return
+        }
+      }
+    }
+    load()
+  }, [params.courseId, topicId])
+
+  if (!topic) {
+    return <div className="p-8 text-center text-muted-foreground">Dars yuklanmoqda...</div>
   }
 
   return (
@@ -44,26 +52,21 @@ export default function TopicViewerPage() {
       <div className="px-6 py-8 sm:px-10 sm:py-12 border-b bg-card">
         <div className="flex items-center gap-2 mb-4">
           <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20 text-xs uppercase font-semibold">
-            Modul {currentModule?.order}: {currentModule?.title}
+            {moduleTitle}
           </Badge>
           <Badge variant="secondary" className="text-xs uppercase bg-muted text-muted-foreground">
-            {currentTopic.type === 'VIDEO' ? 'Video dars' : currentTopic.type === 'THEORY' ? 'Nazariy matn' : 'Test'}
+            {topic.type === "VIDEO" ? "Video dars" : topic.type === "THEORY" ? "Nazariy matn" : "Test"}
           </Badge>
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground leading-tight mb-4">
-          {currentTopic.title}
+          {topic.title}
         </h1>
-        {(currentTopic as any).description && (
-          <p className="text-lg text-muted-foreground">
-            {(currentTopic as any).description}
-          </p>
-        )}
       </div>
 
       {/* Main Content Renderer depending on type */}
       <div className="px-6 py-8 sm:px-10">
         
-        {currentTopic.type === 'VIDEO' && (
+        {topic.type === "VIDEO" && (
           <div className="space-y-6">
             <div className="aspect-video bg-black rounded-lg sm:rounded-xl overflow-hidden relative shadow-lg flex items-center justify-center border">
                {/* Mock Video Player */}
@@ -84,14 +87,14 @@ export default function TopicViewerPage() {
           </div>
         )}
 
-        {currentTopic.type === 'THEORY' && (
+        {topic.type === "THEORY" && (
            <div 
              className="prose prose-sm sm:prose-base dark:prose-invert max-w-none prose-headings:text-primary prose-a:text-[#3B82F6]"
-             dangerouslySetInnerHTML={{ __html: (currentTopic.content as any).html || "<p>Matn mazmuni yuklanmoqda...</p>" }}
+             dangerouslySetInnerHTML={{ __html: topic.content.html || "<p>Matn mazmuni yuklanmoqda...</p>" }}
            />
         )}
 
-        {currentTopic.type === 'QUIZ' && (
+        {topic.type === "QUIZ" && (
           <div className="bg-card border rounded-xl p-8 text-center shadow-sm space-y-6 max-w-2xl mx-auto mt-6">
             <div className="h-20 w-20 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15L11 17L15 13"/></svg>
@@ -109,7 +112,7 @@ export default function TopicViewerPage() {
       </div>
 
       {/* Floating AI chatbot for student side */}
-      <StudentChatbot />
+      <StudentChatbot courseName={courseTitle} summary={moduleTitle} />
     </div>
   )
 }

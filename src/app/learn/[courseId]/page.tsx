@@ -2,7 +2,6 @@
 
 import { useEffect } from "react"
 import { useRouter, useParams } from "next/navigation"
-import { mockModules } from "@/lib/mock-data"
 import { Loader2 } from "lucide-react"
 
 export default function LearnIndexPage() {
@@ -10,10 +9,17 @@ export default function LearnIndexPage() {
   const params = useParams()
 
   useEffect(() => {
-    // Redirect to the first topic of the first module
-    if (mockModules.length > 0 && mockModules[0].topics.length > 0) {
-      router.replace(`/learn/${params.courseId}/topic/${mockModules[0].topics[0].id}`)
+    const load = async () => {
+      const res = await fetch(`/api/courses/${params.courseId}`)
+      if (!res.ok) return
+      const data = await res.json()
+      const firstModule = (data.modules || [])[0]
+      const firstTopic = firstModule && (firstModule.topics || [])[0]
+      if (firstTopic) {
+        router.replace(`/learn/${params.courseId}/topic/${firstTopic.id}`)
+      }
     }
+    load()
   }, [router, params.courseId])
 
   return (
@@ -25,3 +31,4 @@ export default function LearnIndexPage() {
     </div>
   )
 }
+

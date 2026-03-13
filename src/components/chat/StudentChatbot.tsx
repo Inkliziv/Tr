@@ -13,7 +13,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { currentUser, type ChatMsg } from "@/lib/mock-data"
 import { getInitials } from "@/lib/utils"
 
-export function StudentChatbot() {
+interface StudentChatbotProps {
+  courseName?: string
+  summary?: string
+}
+
+export function StudentChatbot({ courseName = "Kurs", summary = "" }: StudentChatbotProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
   const [messages, setMessages] = useState<ChatMsg[]>([
@@ -34,7 +39,7 @@ export function StudentChatbot() {
     }
   }, [messages, isOpen, isMinimized])
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!inputValue.trim()) return
 
     const userMsg: ChatMsg = {
@@ -48,17 +53,36 @@ export function StudentChatbot() {
     setInputValue("")
     setIsLoading(true)
 
-    // Simulate AI response via Claude API Mock
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/ai/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          courseName,
+          summary,
+          question: userMsg.content,
+          lang: "uz",
+        }),
+      })
+      const data = await res.json()
       const aiResponse: ChatMsg = {
         id: `msg-ai-${Date.now()}`,
         role: "assistant",
-        content: "Yaxshi savol. Python da `for` sikli ro'yxat yoki to'plam elementlarini ketma-ket aylanib chiqish uchun ishlatiladi. `while` sikli esa ma'lum bir shart bajarilguniga qadar davom etadi. Yana tushuntirishimni xohlaysizmi?",
-        createdAt: new Date().toISOString()
+        content: data.answer || "AI javobida xatolik yuz berdi.",
+        createdAt: new Date().toISOString(),
       }
       setMessages(prev => [...prev, aiResponse])
+    } catch (e) {
+      const aiResponse: ChatMsg = {
+        id: `msg-ai-${Date.now()}`,
+        role: "assistant",
+        content: "Hozircha savolingizga javob berishda texnik xato yuz berdi. Iltimos, birozdan so'ng qayta urinib ko'ring.",
+        createdAt: new Date().toISOString(),
+      }
+      setMessages(prev => [...prev, aiResponse])
+    } finally {
       setIsLoading(false)
-    }, 1500)
+    }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

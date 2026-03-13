@@ -41,16 +41,28 @@ export default function NewCoursePage() {
   const handleNext = () => setStep(2)
   const handleBack = () => setStep(1)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate API call to create course
-    setTimeout(() => {
+
+    try {
+      const res = await fetch("/api/courses", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        // TODO: toast error
+        setIsSubmitting(false)
+        return
+      }
+
+      const course = await res.json()
+      router.push(`/courses/${course.id}/edit`)
+    } catch {
       setIsSubmitting(false)
-      // On real app, this would use the returned ID: router.push(`/courses/${newCourse.id}/edit`)
-      router.push(`/courses/course-new/edit`)
-    }, 1500)
+    }
   }
 
   return (

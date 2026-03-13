@@ -18,26 +18,45 @@ export function AIWritingPanel({ selectedText = "", onApply }: AIWritingPanelPro
   const [suggestion, setSuggestion] = useState<string | null>(null)
   const [actionType, setActionType] = useState<string>("")
 
-  const handleAIAction = (action: string) => {
+  const handleAIAction = async (action: string) => {
+    if (!selectedText) return
     setIsGenerating(true)
     setActionType(action)
-    
-    // Simulate AI API call
-    setTimeout(() => {
-      let result = ""
+    try {
       if (action === "improve") {
-        result = "Python dasturlash tili sun'iy intellekt, ma'lumotlar tahlili va web tizimlar yaratishda eng ko'p foydalaniladigan va o'rganish oson bo'lgan zamonaviy kodlash vositasidir."
-      } else if (action === "Russian") {
-        result = "Python — это современный инструмент кодирования, который наиболее часто используется в создании искусственного интеллекта, анализа данных и веб-систем, и легко осваивается."
-      } else if (action === "summary") {
-        result = "- Python mashhur va oson o'rganiladigan til.\n- Asosan AI va Web sohalarida qo'llaniladi.\n- Dunyo bo'ylab katta jamoaga ega."
-      } else if (action === "examples") {
-        result = "Misollar:\n1. Instagram backend dvigateli (Django)\n2. Spotify musiqiy tavsiya tizimlari (Machine Learning)\n3. NASA koinot tadqiqotlari hisob-kitoblari"
+        const res = await fetch("/api/ai/improve-text", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: selectedText, level: "university", lang: "uz" }),
+        })
+        const data = await res.json()
+        setSuggestion(data.improved || selectedText)
+      } else if (action === "Russian" || action === "English") {
+        const target = action === "Russian" ? "ru" : "en"
+        const res = await fetch("/api/ai/improve-text", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: selectedText, level: "university", lang: target }),
+        })
+        const data = await res.json()
+        setSuggestion(data.improved || selectedText)
+      } else if (action === "summary" || action === "examples") {
+        const prompt = action === "summary"
+          ? "Ushbu matndan uchta asosiy fikrni qisqa punktlar ko'rinishida xulosa qilib bering."
+          : "Ushbu tushuncha uchun uchta hayotiy, universitetga oid misol keltiring."
+        const res = await fetch("/api/ai/improve-text", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: `${prompt}\n\n${selectedText}`, level: "university", lang: "uz" }),
+        })
+        const data = await res.json()
+        setSuggestion(data.improved || selectedText)
       }
-      
-      setSuggestion(result)
+    } catch (e) {
+      setSuggestion("AI xatosi yuz berdi. Iltimos, birozdan so'ng qayta urinib ko'ring.")
+    } finally {
       setIsGenerating(false)
-    }, 1500)
+    }
   }
 
   const handleApply = () => {

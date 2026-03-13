@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import { ArrowLeft, ExternalLink, Save, BookOpen, Clock, BarChart, History } from "lucide-react"
@@ -19,48 +19,40 @@ import {
 import { TheoryEditor } from "@/components/editor/TheoryEditor"
 import { AIWritingPanel } from "@/components/editor/AIWritingPanel"
 
-import { mockCourses, mockModules } from "@/lib/mock-data"
 import { readingTime } from "@/lib/utils"
 
 export default function TopicEditorPage() {
   const params = useParams()
-  // Mock data retrieval
   const courseId = params.id as string
   const topicId = params.topicId as string
-  
-  const course = mockCourses.find(c => c.id === courseId) || mockCourses[0]
-  
-  // Find topic from mock data
-  let currentTopic = null
-  let currentModule = null
-  
-  for (const mod of mockModules) {
-    const topic = mod.topics.find(t => t.id === topicId)
-    if (topic) {
-      currentTopic = topic
-      currentModule = mod
-      break
-    }
-  }
 
-  // Fallback if not found
-  if (!currentTopic) {
-    currentTopic = {
-      id: "new-topic",
-      moduleId: "mod-1",
-      title: "Yangi dars",
-      type: "THEORY",
-      content: { html: "<p>Dars matnini bu yerga yozing...</p>" },
-      order: 1,
-      bloomLevel: "UNDERSTAND"
-    }
-  }
-
-  const [title, setTitle] = useState(currentTopic.title)
-  const [content, setContent] = useState((currentTopic.content as any).html || "<p>Dars matnini bu yerga yozing...</p>")
-  const [bloomLevel, setBloomLevel] = useState(currentTopic.bloomLevel || "UNDERSTAND")
+  const [title, setTitle] = useState("")
+  const [moduleTitle, setModuleTitle] = useState("")
+  const [content, setContent] = useState("<p>Dars matnini bu yerga yozing...</p>")
+  const [bloomLevel, setBloomLevel] = useState("UNDERSTAND")
   const [isSaving, setIsSaving] = useState(false)
   const [selectedText, setSelectedText] = useState("")
+
+  // Load topic data from API
+  useEffect(() => {
+    const load = async () => {
+      const res = await fetch(`/api/courses/${courseId}`)
+      if (!res.ok) return
+      const data = await res.json()
+      const allModules = data.modules || []
+      for (const mod of allModules) {
+        const topic = (mod.topics || []).find((t: any) => t.id === topicId)
+        if (topic) {
+          setTitle(topic.title)
+          setModuleTitle(mod.title)
+          const html = (topic.content && topic.content.html) || "<p>Dars matnini bu yerga yozing...</p>"
+          setContent(html)
+          return
+        }
+      }
+    }
+    load()
+  }, [courseId, topicId])
 
   // Handle text selection for AI panel
   const handleMouseUp = () => {
@@ -78,9 +70,20 @@ export default function TopicEditorPage() {
     setContent((prev: string) => prev + `\n<br><strong>AI Tavsiyasi:</strong> ${suggestion}`)
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setIsSaving(true)
-    setTimeout(() => setIsSaving(false), 800)
+    try {
+      await fetch(`/api/topics/${topicId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title,
+          content: { html: content },
+        }),
+      })
+    } finally {
+      setIsSaving(false)
+    }
   }
 
   return (
@@ -96,9 +99,9 @@ export default function TopicEditorPage() {
           
           <div className="hidden md:flex flex-col">
             <div className="flex items-center gap-2 text-xs text-muted-foreground mb-0.5">
-              <Link href={`/courses/${courseId}/edit`} className="hover:text-foreground transition-colors line-clamp-1 max-w-[150px]">{course.title}</Link>
+              <Link href={`/courses/${courseId}/edit`} className="hover:text-foreground transition-colors line-clamp-1 max-w-[150px]">Kurs</Link>
               <span>/</span>
-              <span className="line-clamp-1 max-w-[150px]">{currentModule?.title || "Modul"}</span>
+              <span className="line-clamp-1 max-w-[150px]">{moduleTitle || "Modul"}</span>
             </div>
             <div className="flex items-center gap-3">
               <Badge variant="outline" className="text-[10px] uppercase font-semibold h-5 bg-primary/5 text-primary border-primary/20">
