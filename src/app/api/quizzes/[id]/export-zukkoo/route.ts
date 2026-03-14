@@ -5,7 +5,7 @@ import { auth } from "@/auth"
 // to Zukkoo-compatible format:
 // { questions:[{text, options:[4], correct_index, time_limit}] }
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await auth()
   if (!session) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
@@ -13,8 +13,9 @@ export async function POST(req: Request, { params }: { params: { id: string } })
 
   const { questions } = await req.json()
 
+  const { id } = await params
   const zukkoo = {
-    quizId: params.id,
+    quizId: id,
     questions: (questions || []).map((q: any) => ({
       text: q.question,
       options: q.options || [],

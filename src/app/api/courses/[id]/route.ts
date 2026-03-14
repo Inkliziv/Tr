@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server"
 import { auth } from "@/auth"
+import { prisma } from "@/lib/prisma"
 
 interface Params {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 // GET /api/courses/:id — course with modules/topics
@@ -12,8 +13,9 @@ export async function GET(_req: Request, { params }: Params) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
   }
 
+  const { id } = await params
   const course = await prisma.course.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       modules: {
         orderBy: { order: "asc" },
@@ -42,8 +44,9 @@ export async function PUT(req: Request, { params }: Params) {
 
   const body = await req.json()
 
+  const { id } = await params
   const course = await prisma.course.update({
-    where: { id: params.id },
+    where: { id },
     data: {
       title: body.title,
       description: body.description,
@@ -62,7 +65,8 @@ export async function DELETE(_req: Request, { params }: Params) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
   }
 
-  await prisma.course.delete({ where: { id: params.id } })
+  const { id } = await params
+  await prisma.course.delete({ where: { id } })
   return NextResponse.json({ ok: true })
 }
 

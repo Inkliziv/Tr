@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server"
 import { auth } from "@/auth"
+import { prisma } from "@/lib/prisma"
 
 interface Params {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 // POST /api/courses/:id/modules — add module
@@ -19,15 +20,16 @@ export async function POST(req: Request, { params }: Params) {
     return NextResponse.json({ message: "Modul nomi talab qilinadi." }, { status: 400 })
   }
 
+  const { id } = await params
   const maxOrder = await prisma.module.aggregate({
     _max: { order: true },
-    where: { courseId: params.id },
+    where: { courseId: id },
   })
 
   const module = await prisma.module.create({
     data: {
       title,
-      courseId: params.id,
+      courseId: id,
       order: (maxOrder._max.order || 0) + 1,
     },
   })

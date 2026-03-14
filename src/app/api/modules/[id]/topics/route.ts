@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma"
 import { TopicType } from "@prisma/client"
 
 interface Params {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 // POST /api/modules/:id/topics — add topic
@@ -21,16 +21,17 @@ export async function POST(req: Request, { params }: Params) {
     return NextResponse.json({ message: "Mavzu nomi va turi talab qilinadi." }, { status: 400 })
   }
 
+  const { id } = await params
   const maxOrder = await prisma.topic.aggregate({
     _max: { order: true },
-    where: { moduleId: params.id },
+    where: { moduleId: id },
   })
 
   const topic = await prisma.topic.create({
     data: {
       title,
       type,
-      moduleId: params.id,
+      moduleId: id,
       order: (maxOrder._max.order || 0) + 1,
       content: {},
     },
