@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server"
 import { auth } from "@/auth"
-import { prisma } from "@/lib/prisma"
-import { TopicType } from "@prisma/client"
+import { prisma, TopicType } from "@/lib/prisma"
 
 interface Params {
   params: Promise<{ id: string }>

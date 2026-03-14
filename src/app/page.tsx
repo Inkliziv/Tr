@@ -1,9 +1,20 @@
+"use client"
+
 import Link from "next/link"
-import { ArrowRight, BookOpen, Brain, Sparkles, MonitorIcon, GraduationCap, LayoutIcon, Users } from "lucide-react"
+import { ArrowRight, BookOpen, Brain, Sparkles, MonitorIcon, GraduationCap, LayoutIcon, Users, Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
 export default function Home() {
+  const { setTheme, theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navigation */}
@@ -15,17 +26,29 @@ export default function Home() {
             </div>
             EduForge
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium font-sans">
             <Link href="#features" className="text-muted-foreground hover:text-primary transition-colors">Xususiyatlar</Link>
             <Link href="#about" className="text-muted-foreground hover:text-primary transition-colors">Platforma haqida</Link>
             <Link href="#pricing" className="text-muted-foreground hover:text-primary transition-colors">Narxlar</Link>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/dashboard">Kirish</Link>
+            {mounted && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                className="rounded-full"
+              >
+                <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <span className="sr-only">Mavzuni o'zgartirish</span>
+              </Button>
+            )}
+            <Button variant="ghost" size="sm" asChild className="hidden sm:inline-flex rounded-full">
+              <Link href="/dashboard" className="font-sans">Kirish</Link>
             </Button>
-            <Button size="sm" asChild className="rounded-full px-6 shadow-lg shadow-primary/20">
-              <Link href="/courses/new">Boshlash</Link>
+            <Button size="sm" asChild className="rounded-full px-6 shadow-lg shadow-primary/20 bg-primary hover:bg-primary/90">
+              <Link href="/courses/new" className="font-sans">Boshlash</Link>
             </Button>
           </div>
         </div>
@@ -43,7 +66,7 @@ export default function Home() {
               <Sparkles className="mr-2 h-3.5 w-3.5" /> O'zbekistondagi ilk AI-integratsiyalashgan LMS
             </Badge>
             <h1 className="mx-auto max-w-4xl text-5xl font-heading font-extrabold tracking-tight sm:text-7xl leading-[1.1] mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-              Keyingi Avlod <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#3B82F6]">Ta'limiy Resurslarini</span> Birga Yarating
+              Keyingi Avlod <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-primary to-indigo-600">Ta'limiy Resurslarini</span> Birga Yarating
             </h1>
             <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground mb-12 animate-in fade-in slide-in-from-bottom-6 duration-1000">
               Universitet o'qituvchilari va talabalari uchun mo'ljallangan, sun'iy intellekt yordamida kurslar, testlar va slaydlar yaratish platformasi.
