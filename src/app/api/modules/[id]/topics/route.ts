@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-
+import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import { TopicType } from "@prisma/client"
 
 interface Params {
@@ -11,7 +9,7 @@ interface Params {
 
 // POST /api/modules/:id/topics — add topic
 export async function POST(req: Request, { params }: Params) {
-  const session = await getServerSession(authOptions as any)
+  const session = await auth()
   if (!session?.user?.email) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
   }
@@ -40,4 +38,3 @@ export async function POST(req: Request, { params }: Params) {
 
   return NextResponse.json(topic, { status: 201 })
 }
-

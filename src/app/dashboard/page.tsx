@@ -5,8 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { formatDate } from "@/lib/utils"
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { auth } from "@/auth"
 
 async function getCourses() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ""}/api/courses`, {
@@ -17,7 +16,7 @@ async function getCourses() {
 }
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions as any)
+  const session = await auth()
   const courses: any[] = await getCourses()
   const publishedCourses = courses.filter(c => c.status === "PUBLISHED")
   const totalStudents = 0

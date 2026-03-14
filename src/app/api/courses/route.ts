@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-
-import { prisma } from "@/lib/prisma"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { auth } from "@/auth"
+import { redirect } from "next/navigation"
 
 // GET /api/courses — list teacher's courses
 export async function GET() {
-  const session = await getServerSession(authOptions as any)
+  const session = await auth()
   if (!session?.user?.email) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
   }
@@ -29,7 +27,7 @@ export async function GET() {
 
 // POST /api/courses — create new course
 export async function POST(req: Request) {
-  const session = await getServerSession(authOptions as any)
+  const session = await auth()
   if (!session?.user?.email) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
   }

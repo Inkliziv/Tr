@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { auth } from "@/auth"
 
 // This endpoint receives internal quiz JSON and converts it
 // to Zukkoo-compatible format:
 // { questions:[{text, options:[4], correct_index, time_limit}] }
 
 export async function POST(req: Request, { params }: { params: { id: string } }) {
-  const session = await getServerSession(authOptions as any)
+  const session = await auth()
   if (!session) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
   }

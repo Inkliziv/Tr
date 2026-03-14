@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
-import { Loader2, Mail, Lock, LogIn, Google as GoogleIcon } from "lucide-react"
+import { Loader2, Mail, Lock, LogIn, Sparkles as GoogleIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"

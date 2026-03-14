@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-
-import { prisma } from "@/lib/prisma"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { auth } from "@/auth"
 
 interface Params {
   params: { id: string }
@@ -10,7 +7,7 @@ interface Params {
 
 // PUT /api/topics/:id — update topic content / meta
 export async function PUT(req: Request, { params }: Params) {
-  const session = await getServerSession(authOptions as any)
+  const session = await auth()
   if (!session?.user?.email) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
   }

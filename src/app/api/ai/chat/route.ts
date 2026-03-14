@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { auth } from "@/auth"
 import { callGroqChat } from "@/lib/groq"
 
 export async function POST(req: Request) {
-  const session = await getServerSession(authOptions as any)
+  const session = await auth()
   if (!session) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
   }
